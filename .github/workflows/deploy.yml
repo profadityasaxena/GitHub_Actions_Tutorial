@@ -3,7 +3,7 @@ name: Manual Vercel Deployment
 on:
   push:
     branches:
-      - main  # or use 'workflow_dispatch' for manual run
+      - main
 
 jobs:
   deploy:
@@ -19,6 +19,6 @@ jobs:
       - name: Deploy to Vercel
         run: |
           vercel deploy --prod --confirm --cwd website \
-          --token ${{ secrets.TUTORIAL_GITHUB_ACTIONS }} \
+          --token ${{ secrets.TUTORIAL_GITHUB_ACTIONS_2 }} \
           --scope profadityasaxena \
-          --name git-hub-actions-tutorial-using-github-secret
+          --name git-hub-actions-tutorial-using-github-secrets
