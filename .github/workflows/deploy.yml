@@ -1,0 +1,22 @@
+name: Manual Vercel Deployment
+
+on:
+  push:
+    branches:
+      - main  # or use 'workflow_dispatch' for manual run
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy to Vercel with Secret
+        run: |
+          vercel deploy --prod --confirm --cwd website \
+          --token ${{ secrets.TUTORIAL_GITHUB_ACTIONS }}
