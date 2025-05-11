@@ -20,5 +20,4 @@ jobs:
         run: |
           vercel deploy --prod --confirm --cwd website \
           --token ${{ secrets.TUTORIAL_GITHUB_ACTIONS_2 }} \
-          --scope profadityasaxena \
           --name git-hub-actions-tutorial-using-github-secrets
