@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Actions Advanced Workflows</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>🚀 Advanced GitHub Actions Tutorial</h1>
+    <p>Designed and Authored by Aditya Saxena</p>
+  </header>
+
+  <nav>
+    <a href="#intro">What You'll Learn</a>
+    <a href="#features">Key Features</a>
+    <a href="#workflow">Workflow YAML</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#usecases">Use Cases</a>
+    <a href="#next">Next Steps</a>
+  </nav>
+
+  <main>
+    <section class="intro" id="intro">
+      <h2>📘 What You Will Learn</h2>
+      <p>This tutorial will take you beyond basic CI/CD pipelines and into the realm of advanced GitHub Actions workflows. You'll explore how to build secure, efficient, and scalable automations that fit seamlessly into any modern software delivery pipeline.</p>
+      <p>Topics include using matrix builds for multi-environment testing, building reusable workflow templates, managing secrets, and automating production deployments with conditional approvals.</p>
+    </section>
+
+    <section class="features" id="features">
+      <h2>💡 Key Features Covered</h2>
+      <ul>
+        <li><strong>Multi-environment deployment:</strong> Run builds and tests across different operating systems or versions with matrix strategies.</li>
+        <li><strong>Reusable workflows:</strong> Abstract and reuse your logic across repositories using `workflow_call` events.</li>
+        <li><strong>Secret management:</strong> Securely store and reference environment secrets using GitHub's Secrets API.</li>
+        <li><strong>Vercel/GitHub Pages deployment:</strong> Trigger production or preview deployments automatically on merge or tag.</li>
+        <li><strong>Manual triggers & CRON:</strong> Run workflows manually from the UI or on schedule using cron syntax.</li>
+      </ul>
+    </section>
+
+    <section class="workflow-sample" id="workflow">
+      <h2>🧩 Sample Workflow Configuration</h2>
+      <p>The sample below demonstrates a multi-version Node.js build and test setup that triggers on `push`, `workflow_dispatch`, and a weekly schedule.</p>
+      <pre><code>name: Advanced CI/CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1' # Weekly Monday deploy
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [16, 18]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm test
+</code></pre>
+      <p>This configuration helps ensure your application works across multiple versions of Node.js while supporting CI/CD event-driven builds.</p>
+    </section>
+
+    <section class="benefits" id="benefits">
+      <h2>🎯 Why Use GitHub Actions?</h2>
+      <p>GitHub Actions is designed to simplify automation without the need for third-party CI/CD platforms. It enhances development agility by embedding automation directly into your version control system.</p>
+      <ul>
+        <li><strong>Native GitHub Integration:</strong> Trigger workflows from GitHub events like `push`, `pull_request`, or `release`.</li>
+        <li><strong>Free public runners:</strong> Save cost while automating your open-source projects with generous GitHub-hosted runners.</li>
+        <li><strong>Extensible ecosystem:</strong> Thousands of marketplace actions are available to accelerate your development.</li>
+        <li><strong>Secure Secrets:</strong> Built-in secret handling and fine-grained access control via environments.</li>
+      </ul>
+    </section>
+
+    <section class="example-usecases" id="usecases">
+      <h2>🔧 Real-World Use Cases</h2>
+      <ul>
+        <li><strong>Static Site Deployment:</strong> Push to `main` triggers deployment to Vercel/GitHub Pages with automated cache busting.</li>
+        <li><strong>Cross-Platform Testing:</strong> Test your libraries across Linux, macOS, and Windows with ease using a matrix strategy.</li>
+        <li><strong>Security Pipelines:</strong> Auto-run SAST tools like CodeQL and secret scanners on pull requests before merging.</li>
+        <li><strong>Release Automation:</strong> Automatically generate changelogs, publish packages to npm, or trigger Docker builds on tag push.</li>
+      </ul>
+    </section>
+
+    <section class="next-steps" id="next">
+      <h2>📈 Next Steps and Recommendations</h2>
+      <p>After completing this tutorial, consider integrating more advanced features into your DevOps pipeline:</p>
+      <ul>
+        <li><strong>Composite Actions:</strong> Bundle multiple steps into reusable actions stored in your own repository.</li>
+        <li><strong>Slack/Discord Integration:</strong> Send deployment notifications or test results to your team’s communication channels.</li>
+        <li><strong>Artifact Management:</strong> Store logs, screenshots, or binary build files for later retrieval or debugging.</li>
+        <li><strong>OIDC Integration:</strong> Use GitHub’s OIDC tokens to authenticate against AWS, Azure, or GCP without long-lived secrets.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Aditya Saxena — All rights reserved.</p>
+  </footer>
+  <script src="js/app.js"></script>
+</body>
+</html>
