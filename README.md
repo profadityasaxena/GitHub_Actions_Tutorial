@@ -18,7 +18,6 @@
 This project demonstrates how to set up a simple HTML/CSS/JavaScript web app and automate its deployment to Vercel using GitHub Actions. The goal is to teach CI/CD basics with GitHub Actions and modern deployment pipelines in a hands-on, developer-friendly manner.
 
 ---
-
 ## 🧠 Skills Built
 
 | Skill Category          | Description                                                                 |
@@ -28,6 +27,7 @@ This project demonstrates how to set up a simple HTML/CSS/JavaScript web app and
 | Vercel Deployment       | Integrating GitHub with Vercel for auto-deployment                          |
 | Front-End Development   | Building and managing HTML, CSS, JavaScript projects                        |
 | Repository Management   | Structuring GitHub repositories for team-ready projects                     |
+| GitHub Secrets          | Securing API tokens and environment variables for safe CI/CD operations     |
 
 ---
 
@@ -47,13 +47,13 @@ This project demonstrates how to set up a simple HTML/CSS/JavaScript web app and
 
 ### ✅ Step 3: Link GitHub Repo to Vercel
 - **Description:** Log in to [Vercel](https://vercel.com), import the GitHub repo, and choose the project directory.
-- **Purpose:** This configures Vercel to listen for pushes to main/master and deploy automatically.
+- **Purpose:** This configures Vercel to listen for pushes to `main`/`master` and deploy automatically.
 
 ---
 
 ### ✅ Step 4: Create `.github/workflows/deploy.yml`
-- **Description:** Add a GitHub Actions workflow YAML file to automate builds or tests.
-- **Purpose:** Triggers Vercel deployment via GitHub push events. You can also run lint/test steps here.
+- **Description:** Add a GitHub Actions workflow YAML file to automate builds, tests, and deployment using GitHub Secrets.
+- **Purpose:** Triggers Vercel deployment via GitHub push events, securely using your Vercel token.
 
 ```yaml
 name: Deploy to Vercel
@@ -66,24 +66,30 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
-      - name: Trigger Vercel Deployment
-        run: echo "Deployment triggered by GitHub Actions"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Vercel
+        run: |
+          curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_XXXXX \
+          -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}"
 ```
+
+> 💡 Make sure to add your `VERCEL_TOKEN` in **GitHub Settings → Secrets and variables → Actions**.
 
 ---
 
 ### ✅ Step 5: Test the Workflow
 - **Description:** Make a change to your code and push it to the `main` branch.
-- **Purpose:** GitHub Actions should trigger and the app should deploy on Vercel.
+- **Purpose:** GitHub Actions should trigger and the app should deploy automatically via Vercel's API.
 
 ---
 
 ### ✅ Step 6: Share Your Live Project
-- **Description:** Copy the live link from Vercel and add it to your GitHub README.
-- **Purpose:** Demonstrates end-to-end automation and deployment.
+- **Description:** Copy the live link from your Vercel dashboard and include it in your project’s `README.md`.
+- **Purpose:** Demonstrates end-to-end CI/CD workflow integration with GitHub Actions.
 
 ---
 
