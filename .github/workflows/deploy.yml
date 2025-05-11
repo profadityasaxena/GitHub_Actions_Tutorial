@@ -18,6 +18,7 @@ jobs:
 
       - name: Deploy to Vercel
         run: |
-          vercel deploy --prod --confirm --cwd website \
+          vercel deploy --prod --yes --cwd . \
           --token ${{ secrets.TUTORIAL_GITHUB_ACTIONS_2 }} \
+          --scope profadityasaxena \
           --name git-hub-actions-tutorial-using-github-secrets
