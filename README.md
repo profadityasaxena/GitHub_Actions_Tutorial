@@ -48,7 +48,7 @@ This project demonstrates how to set up a simple HTML/CSS/JavaScript web app and
 ### ✅ Step 3: Link GitHub Repo to Vercel
 - **Description:** Log in to [Vercel](https://vercel.com), import the GitHub repo, and choose the project directory.
 - **Purpose:** This configures Vercel to listen for pushes to `main`/`master` and deploy automatically.
-
+- **Final Deployment** I have deployed my project to this location: https://git-hub-actions-tutorial.vercel.app/
 ---
 
 ### ✅ Step 4: Create `.github/workflows/deploy.yml`
